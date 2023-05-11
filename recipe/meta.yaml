@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/medspacy_quickumls-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 09edeb61467f3570e370337c9bb635f65a03246c9c8fd2af0bb9710e75a46a06
 
 build:
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   number: 0
 
 requirements:
@@ -29,6 +29,8 @@ requirements:
     - unqlite >=0.8.1
     - pytest >=6
     - six
+    # pydantic <1.9.0 is required for spacy 3.3.1 and thinc 8.0.15
+    - pydantic >=1.7.4,!=1.8,!=1.8.1,<1.9.0
 
 test:
   imports:
@@ -40,8 +42,13 @@ test:
 
 about:
   home: https://github.com/Georgetown-IR-Lab/QuickUMLS
+  dev_url: https://github.com/Georgetown-IR-Lab/QuickUMLS
+  doc_url: https://github.com/Georgetown-IR-Lab/QuickUMLS
   summary: QuickUMLS is a tool for fast, unsupervised biomedical concept extraction from medical text
+  description: |
+    QuickUMLS is a tool for fast, unsupervised biomedical concept extraction from medical text
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
 
 extra:
